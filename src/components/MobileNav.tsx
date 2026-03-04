@@ -12,7 +12,7 @@ const sidebar = {
     transition: { type: "tween" as const, duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] as const },
   },
   closed: {
-    x: "100%",
+    x: "-100%", // חוזר לצד שמאל (נפתח ימינה)
     transition: { type: "tween" as const, duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] as const },
   },
 };
@@ -30,7 +30,7 @@ const itemVariants = {
   }),
   closed: { 
     opacity: 0, 
-    x: 16, 
+    x: -16, // אנימציה נכנסת משמאל
     transition: { duration: 0.15 } 
   },
 };
@@ -40,9 +40,7 @@ const MobileNav = ({ links }: MobileNavProps) => {
 
   return (
     <div className="md:hidden">
-      {/* Note: If this trigger button is still on the left of your screen, 
-          add "flex justify-end" to the wrapper div above. 
-      */}
+      {/* כפתור ההמבורגר - ממוקם בצד שמאל */}
       <button
         className="flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground"
         onClick={() => setOpen(true)}
@@ -54,6 +52,7 @@ const MobileNav = ({ links }: MobileNavProps) => {
       <AnimatePresence>
         {open && (
           <>
+            {/* Overlay - הרקע הכהה */}
             <motion.div
               key="overlay"
               className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
@@ -64,26 +63,38 @@ const MobileNav = ({ links }: MobileNavProps) => {
               onClick={() => setOpen(false)}
             />
 
+            {/* Sidebar - הסיידבר עצמו */}
             <motion.aside
               key="sidebar"
-              className="fixed inset-y-0 right-0 z-50 w-64 border-l border-border/60 bg-background/95 backdrop-blur-xl px-6 pt-5 pb-8"
+              className="fixed inset-y-0 left-0 z-50 w-64 border-r border-border/60 bg-background/95 backdrop-blur-xl px-6 pt-5 pb-8"
               variants={sidebar}
               initial="closed"
               animate="open"
               exit="closed"
             >
-              {/* HEADER SECTION: Now reversed for right-side alignment */}
-              <div className="flex flex-row-reverse items-center justify-between mb-8">
-                <span className="text-sm font-semibold text-foreground">Menu</span>
-                <button
-                  className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground"
-                  onClick={() => setOpen(false)}
-                  aria-label="Close menu"
-                >
-                  <X size={16} />
-                </button>
+              {/* HEADER: כאן המילה Menu תהיה בדיוק באמצע */}
+              <div className="grid grid-cols-3 items-center mb-8">
+                {/* עמודה ריקה כדי לאזן את ה-X */}
+                <div /> 
+                
+                {/* המילה MENU במרכז */}
+                <span className="text-sm font-semibold text-foreground text-center whitespace-nowrap">
+                  Menu
+                </span>
+
+                {/* כפתור הסגירה בצד ימין של הסיידבר */}
+                <div className="flex justify-end">
+                  <button
+                    className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground"
+                    onClick={() => setOpen(false)}
+                    aria-label="Close menu"
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
               </div>
 
+              {/* רשימת הקישורים */}
               <nav className="flex flex-col gap-1">
                 {links.map((s, i) => (
                   <motion.a
@@ -95,7 +106,7 @@ const MobileNav = ({ links }: MobileNavProps) => {
                     animate="open"
                     exit="closed"
                     onClick={() => setOpen(false)}
-                    className="rounded-lg px-3 py-2.5 text-sm font-medium capitalize text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground text-right"
+                    className="rounded-lg px-3 py-2.5 text-sm font-medium capitalize text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
                   >
                     {s}
                   </motion.a>
