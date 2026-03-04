@@ -9,13 +9,12 @@ export default {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1200px",
+        "2xl": "1120px",
       },
     },
     extend: {
       fontFamily: {
-        display: ["'JetBrains Mono'", "monospace"],
-        body: ["'Inter'", "sans-serif"],
+        sans: ["'Inter'", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -76,15 +75,10 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        jump: {
-          "0%, 100%": { transform: "translateY(0) scale(1)" },
-          "50%": { transform: "translateY(-40px) scale(1)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        jump: "jump 5.0s ease-in-out infinite",
       },
     },
   },
