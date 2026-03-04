@@ -4,13 +4,13 @@ interface SkillGroupProps {
 }
 
 const SkillGroup = ({ title, skills }: SkillGroupProps) => (
-  <div>
-    <h3 className="mb-3 font-display text-sm font-medium text-primary">{title}</h3>
+  <div className="apple-card p-6">
+    <h3 className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">{title}</h3>
     <div className="flex flex-wrap gap-2">
       {skills.map((skill) => (
         <span
           key={skill}
-          className="rounded border border-border bg-muted px-3 py-1.5 font-display text-xs text-secondary-foreground transition-colors hover:border-glow"
+          className="rounded-full bg-secondary px-3.5 py-1.5 text-sm font-medium text-foreground transition-colors duration-300 hover:bg-foreground hover:text-primary-foreground"
         >
           {skill}
         </span>
