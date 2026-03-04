@@ -1,4 +1,5 @@
-import { Github, Linkedin, Mail, FileText } from "lucide-react"; // הוסר Twitter
+import { Github, Linkedin, Mail, FileText, Menu, X } from "lucide-react";
+import { useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import SkillGroup from "@/components/SkillGroup";
 
@@ -82,14 +83,18 @@ const SOCIALS = [
 ];
 
 const Index = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navLinks = ["experience", "education", "volunteer", "projects", "skills", "contact"];
+
   return (
     <div className="min-h-screen bg-background">
       {/* Nav */}
       <nav className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
         <div className="container flex h-14 items-center justify-between">
           <span className="font-display text-sm font-bold text-primary">~/Afek Aharoni's Portfolio</span>
-          <div className="flex gap-6">
-            {["experience", "education", "volunteer", "projects", "skills", "contact"].map((s) => (
+          {/* Desktop nav */}
+          <div className="hidden gap-6 md:flex">
+            {navLinks.map((s) => (
               <a
                 key={s}
                 href={`#${s}`}
@@ -99,7 +104,32 @@ const Index = () => {
               </a>
             ))}
           </div>
+          {/* Mobile burger */}
+          <button
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-primary md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
+        {/* Mobile menu */}
+        {mobileMenuOpen && (
+          <div className="border-t border-border bg-background px-4 pb-4 pt-2 md:hidden">
+            <div className="flex flex-col gap-3">
+              {navLinks.map((s) => (
+                <a
+                  key={s}
+                  href={`#${s}`}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="font-display text-sm text-muted-foreground transition-colors hover:text-primary"
+                >
+                  .{s}()
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero */}
