@@ -12,7 +12,7 @@ const sidebar = {
     transition: { type: "tween" as const, duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] as const },
   },
   closed: {
-    x: "100%", // Changed from -100% to slide out to the right
+    x: "100%",
     transition: { type: "tween" as const, duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] as const },
   },
 };
@@ -30,7 +30,7 @@ const itemVariants = {
   }),
   closed: { 
     opacity: 0, 
-    x: 16, // Changed from -16 to animate in from the right
+    x: 16, 
     transition: { duration: 0.15 } 
   },
 };
@@ -40,7 +40,9 @@ const MobileNav = ({ links }: MobileNavProps) => {
 
   return (
     <div className="md:hidden">
-      {/* Trigger Button - Consider adding 'flex justify-end' to parent if you want this on the right too */}
+      {/* Note: If this trigger button is still on the left of your screen, 
+          add "flex justify-end" to the wrapper div above. 
+      */}
       <button
         className="flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground"
         onClick={() => setOpen(true)}
@@ -52,7 +54,6 @@ const MobileNav = ({ links }: MobileNavProps) => {
       <AnimatePresence>
         {open && (
           <>
-            {/* Overlay */}
             <motion.div
               key="overlay"
               className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
@@ -63,16 +64,16 @@ const MobileNav = ({ links }: MobileNavProps) => {
               onClick={() => setOpen(false)}
             />
 
-            {/* Sidebar */}
             <motion.aside
               key="sidebar"
-              className="fixed inset-y-0 right-0 z-50 w-64 border-l border-border/60 bg-background/95 backdrop-blur-xl px-6 pt-5 pb-8" // Changed left-0 to right-0 and border-r to border-l
+              className="fixed inset-y-0 right-0 z-50 w-64 border-l border-border/60 bg-background/95 backdrop-blur-xl px-6 pt-5 pb-8"
               variants={sidebar}
               initial="closed"
               animate="open"
               exit="closed"
             >
-              <div className="flex items-center justify-between mb-8">
+              {/* HEADER SECTION: Now reversed for right-side alignment */}
+              <div className="flex flex-row-reverse items-center justify-between mb-8">
                 <span className="text-sm font-semibold text-foreground">Menu</span>
                 <button
                   className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground"
@@ -94,7 +95,7 @@ const MobileNav = ({ links }: MobileNavProps) => {
                     animate="open"
                     exit="closed"
                     onClick={() => setOpen(false)}
-                    className="rounded-lg px-3 py-2.5 text-sm font-medium capitalize text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground text-right" // Added text-right for better alignment
+                    className="rounded-lg px-3 py-2.5 text-sm font-medium capitalize text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground text-right"
                   >
                     {s}
                   </motion.a>
