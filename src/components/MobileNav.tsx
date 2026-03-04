@@ -64,7 +64,7 @@ const MobileNav = ({ links }: MobileNavProps) => {
             {/* Overlay */}
             <motion.div
               key="overlay"
-              className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm"
+              className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
               variants={overlay}
               initial="closed"
               animate="open"
@@ -72,17 +72,10 @@ const MobileNav = ({ links }: MobileNavProps) => {
               onClick={() => setOpen(false)}
             />
 
-            {/* Sidebar — liquid glass */}
+            {/* Sidebar */}
             <motion.aside
               key="sidebar"
-              className="fixed inset-y-0 left-0 z-50 w-64 px-6 pt-5 pb-8"
-              style={{
-                background: "rgba(255, 255, 255, 0.08)",
-                backdropFilter: "blur(40px) saturate(180%)",
-                WebkitBackdropFilter: "blur(40px) saturate(180%)",
-                borderRight: "1px solid rgba(255, 255, 255, 0.15)",
-                boxShadow: "inset 1px 0 0 rgba(255,255,255,0.1), 4px 0 32px rgba(0,0,0,0.25)",
-              }}
+              className="fixed inset-y-0 left-0 z-50 w-64 border-r border-border/60 bg-background/95 backdrop-blur-xl px-6 pt-5 pb-8"
               variants={sidebar}
               initial="closed"
               animate="open"
@@ -117,7 +110,7 @@ const MobileNav = ({ links }: MobileNavProps) => {
                     animate="open"
                     exit="closed"
                     onClick={() => setOpen(false)}
-                    className="rounded-lg px-3 py-2.5 text-sm font-medium capitalize text-muted-foreground transition-colors hover:bg-white/10 hover:text-foreground"
+                    className="rounded-lg px-3 py-2.5 text-sm font-medium capitalize text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
                   >
                     {s}
                   </motion.a>
