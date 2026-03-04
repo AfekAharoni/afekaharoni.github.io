@@ -1,5 +1,5 @@
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface MobileNavProps {
@@ -12,7 +12,7 @@ const sidebar = {
     transition: { type: "tween" as const, duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] as const },
   },
   closed: {
-    x: "-100%", // חוזר לצד שמאל (נפתח ימינה)
+    x: "-100%",
     transition: { type: "tween" as const, duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] as const },
   },
 };
@@ -28,19 +28,28 @@ const itemVariants = {
     x: 0,
     transition: { delay: 0.08 + i * 0.05, duration: 0.3, ease: "easeOut" as const },
   }),
-  closed: { 
-    opacity: 0, 
-    x: -16, // אנימציה נכנסת משמאל
-    transition: { duration: 0.15 } 
+  closed: {
+    opacity: 0,
+    x: -16,
+    transition: { duration: 0.15 },
   },
 };
 
 const MobileNav = ({ links }: MobileNavProps) => {
   const [open, setOpen] = useState(false);
 
+  // Auto-close sidebar on scroll
+  useEffect(() => {
+    if (!open) return;
+
+    const handleScroll = () => setOpen(false);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [open]);
+
   return (
     <div className="md:hidden">
-      {/* כפתור ההמבורגר - ממוקם בצד שמאל */}
+      {/* Hamburger button */}
       <button
         className="flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground"
         onClick={() => setOpen(true)}
@@ -52,10 +61,10 @@ const MobileNav = ({ links }: MobileNavProps) => {
       <AnimatePresence>
         {open && (
           <>
-            {/* Overlay - הרקע הכהה */}
+            {/* Overlay */}
             <motion.div
               key="overlay"
-              className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+              className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm"
               variants={overlay}
               initial="closed"
               animate="open"
@@ -63,26 +72,28 @@ const MobileNav = ({ links }: MobileNavProps) => {
               onClick={() => setOpen(false)}
             />
 
-            {/* Sidebar - הסיידבר עצמו */}
+            {/* Sidebar — liquid glass */}
             <motion.aside
               key="sidebar"
-              className="fixed inset-y-0 left-0 z-50 w-64 border-r border-border/60 bg-background/95 backdrop-blur-xl px-6 pt-5 pb-8"
+              className="fixed inset-y-0 left-0 z-50 w-64 px-6 pt-5 pb-8"
+              style={{
+                background: "rgba(255, 255, 255, 0.08)",
+                backdropFilter: "blur(40px) saturate(180%)",
+                WebkitBackdropFilter: "blur(40px) saturate(180%)",
+                borderRight: "1px solid rgba(255, 255, 255, 0.15)",
+                boxShadow: "inset 1px 0 0 rgba(255,255,255,0.1), 4px 0 32px rgba(0,0,0,0.25)",
+              }}
               variants={sidebar}
               initial="closed"
               animate="open"
               exit="closed"
             >
-              {/* HEADER: כאן המילה Menu תהיה בדיוק באמצע */}
+              {/* Header: Menu label + close button */}
               <div className="grid grid-cols-3 items-center mb-8">
-                {/* עמודה ריקה כדי לאזן את ה-X */}
-                <div /> 
-                
-                {/* המילה MENU במרכז */}
+                <div />
                 <span className="text-sm font-semibold text-foreground text-center whitespace-nowrap">
                   Menu
                 </span>
-
-                {/* כפתור הסגירה בצד ימין של הסיידבר */}
                 <div className="flex justify-end">
                   <button
                     className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground"
@@ -94,7 +105,7 @@ const MobileNav = ({ links }: MobileNavProps) => {
                 </div>
               </div>
 
-              {/* רשימת הקישורים */}
+              {/* Nav links */}
               <nav className="flex flex-col gap-1">
                 {links.map((s, i) => (
                   <motion.a
@@ -106,7 +117,7 @@ const MobileNav = ({ links }: MobileNavProps) => {
                     animate="open"
                     exit="closed"
                     onClick={() => setOpen(false)}
-                    className="rounded-lg px-3 py-2.5 text-sm font-medium capitalize text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                    className="rounded-lg px-3 py-2.5 text-sm font-medium capitalize text-muted-foreground transition-colors hover:bg-white/10 hover:text-foreground"
                   >
                     {s}
                   </motion.a>
