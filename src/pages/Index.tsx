@@ -151,8 +151,8 @@ const Index = () => {
           />
         </FadeIn>
         <FadeIn delay={0.1}>
-          <h1 className="mb-4 text-5xl font-bold tracking-tight text-foreground md:text-7xl">
-            Afek Aharoni
+          <h1 className="mb-4 text-5xl font-bold tracking-tight md:text-7xl">
+            <span className="text-gradient">Afek Aharoni</span>
           </h1>
         </FadeIn>
         <FadeIn delay={0.2}>
@@ -309,7 +309,7 @@ const Index = () => {
             </p>
             <a
               href="mailto:afekaharoni@gmail.com"
-              className="inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:opacity-80"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:opacity-85"
             >
               <Mail size={16} />
               Say hello
