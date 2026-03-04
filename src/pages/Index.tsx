@@ -1,8 +1,9 @@
-import { Github, Linkedin, Mail, FileText, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Github, Linkedin, Mail, FileText } from "lucide-react";
 import ProjectCard from "@/components/ProjectCard";
 import SkillGroup from "@/components/SkillGroup";
 import FadeIn from "@/components/FadeIn";
+import TypeWriter from "@/components/TypeWriter";
+import MobileNav from "@/components/MobileNav";
 
 const EXPERIENCE = [
   {
@@ -90,7 +91,6 @@ const SectionTitle = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Index = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navLinks = ["experience", "education", "volunteer", "projects", "skills", "contact"];
 
   return (
@@ -113,32 +113,8 @@ const Index = () => {
               </a>
             ))}
           </div>
-          {/* Mobile burger */}
-          <button
-            className="flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground md:hidden"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
-          </button>
+          <MobileNav links={navLinks} />
         </div>
-        {/* Mobile menu */}
-        {mobileMenuOpen && (
-          <div className="border-t border-border/60 glass px-6 pb-6 pt-4 md:hidden">
-            <div className="flex flex-col gap-4">
-              {navLinks.map((s) => (
-                <a
-                  key={s}
-                  href={`#${s}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground capitalize"
-                >
-                  {s}
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
       </nav>
 
       {/* Hero */}
@@ -152,7 +128,7 @@ const Index = () => {
         </FadeIn>
         <FadeIn delay={0.1}>
           <h1 className="mb-4 text-5xl font-bold tracking-tight md:text-7xl">
-            <span className="text-gradient">Afek Aharoni</span>
+            <TypeWriter text="Afek Aharoni" duration={1.3} className="text-gradient" />
           </h1>
         </FadeIn>
         <FadeIn delay={0.2}>
