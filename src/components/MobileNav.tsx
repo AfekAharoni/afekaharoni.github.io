@@ -12,7 +12,7 @@ const sidebar = {
     transition: { type: "tween" as const, duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] as const },
   },
   closed: {
-    x: "-100%",
+    x: "100%", // Changed from -100% to slide out to the right
     transition: { type: "tween" as const, duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] as const },
   },
 };
@@ -28,7 +28,11 @@ const itemVariants = {
     x: 0,
     transition: { delay: 0.08 + i * 0.05, duration: 0.3, ease: "easeOut" as const },
   }),
-  closed: { opacity: 0, x: -16, transition: { duration: 0.15 } },
+  closed: { 
+    opacity: 0, 
+    x: 16, // Changed from -16 to animate in from the right
+    transition: { duration: 0.15 } 
+  },
 };
 
 const MobileNav = ({ links }: MobileNavProps) => {
@@ -36,6 +40,7 @@ const MobileNav = ({ links }: MobileNavProps) => {
 
   return (
     <div className="md:hidden">
+      {/* Trigger Button - Consider adding 'flex justify-end' to parent if you want this on the right too */}
       <button
         className="flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground"
         onClick={() => setOpen(true)}
@@ -61,7 +66,7 @@ const MobileNav = ({ links }: MobileNavProps) => {
             {/* Sidebar */}
             <motion.aside
               key="sidebar"
-              className="fixed inset-y-0 left-0 z-50 w-64 border-r border-border/60 bg-background/95 backdrop-blur-xl px-6 pt-5 pb-8"
+              className="fixed inset-y-0 right-0 z-50 w-64 border-l border-border/60 bg-background/95 backdrop-blur-xl px-6 pt-5 pb-8" // Changed left-0 to right-0 and border-r to border-l
               variants={sidebar}
               initial="closed"
               animate="open"
@@ -89,7 +94,7 @@ const MobileNav = ({ links }: MobileNavProps) => {
                     animate="open"
                     exit="closed"
                     onClick={() => setOpen(false)}
-                    className="rounded-lg px-3 py-2.5 text-sm font-medium capitalize text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                    className="rounded-lg px-3 py-2.5 text-sm font-medium capitalize text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground text-right" // Added text-right for better alignment
                   >
                     {s}
                   </motion.a>
