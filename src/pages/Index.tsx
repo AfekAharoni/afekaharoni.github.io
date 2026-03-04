@@ -98,7 +98,10 @@ const Index = () => {
       {/* Nav */}
       <nav className="sticky top-0 z-50 border-b border-border/60 glass">
         <div className="container flex h-12 items-center justify-between">
-          <a href="#" className="text-sm font-semibold text-foreground">
+          {/* Hamburger on the LEFT (mobile only) */}
+          <MobileNav links={navLinks} />
+          {/* Name: hidden on mobile, visible on desktop */}
+          <a href="#" className="hidden md:block text-sm font-semibold text-foreground">
             Afek Aharoni
           </a>
           {/* Desktop nav */}
@@ -113,7 +116,6 @@ const Index = () => {
               </a>
             ))}
           </div>
-          <MobileNav links={navLinks} />
         </div>
       </nav>
 
