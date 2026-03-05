@@ -10,11 +10,3 @@ My personal **software engineering portfolio website**, showcasing selected proj
 [View All Projects](https://github.com/AfekAharoni)
 
 </div>
-
-Portfolio
-https://afekaharoni.github.io/
-
-GitHub
-https://github.com/AfekAharoni
-
----
