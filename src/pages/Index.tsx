@@ -57,6 +57,13 @@ const VOLUNTEER = [
 
 const PROJECTS = [
   {
+    title: "PhishEye",
+    icon: "/phisheye.png",
+    description: "Gmail addon detecting phishing threats via automated scoring of links and attachments. Implemented with FastAPI and ngrok to evaluate sender reputation and generate comprehensive risk assessments.",
+    tags: ["Python", "Data Analysis", "FastAPI", "ngrok", "Google Workspace", "Apps Script", "URL Analysis", "Email Authentication", "Phishing Detection", "Malware Inspection"],
+    github: "https://github.com/AfekAharoni/PhishEye-Malicious-Email-Scorer",
+  },
+  {
     title: "Text Analyzer",
     icon: "/textanalyzer.png",
     description: "Developed a Text Analyzer in Python that clusters sentences based on shared words and finds fixed-length paths in connection graphs. Focused on graph algorithms, optimization, and performance analysis.",
