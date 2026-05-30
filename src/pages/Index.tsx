@@ -57,6 +57,13 @@ const VOLUNTEER = [
 
 const PROJECTS = [
   {
+    title: "ParAlert",
+    icon: "/paralert.png",
+    description: "Developed an AI-based real-time child safety alert system for parents, designed to detect harmful situations in children's WhatsApp conversations, including bullying, threats, unsafe media, deepfakes, and social exclusion. The system analyzes text, images, and videos, classifies event severity, identifies the child's role, and provides parents with contextual and practical guidance. Built a React dashboard, FastAPI backend, WebSocket-based alert flow, ML detection models, and a WhatsApp proof-of-concept bridge. The project was selected as a Top 4 finalist in the 2026 Hebrew University Hackathon.",
+    tags: ["AI/ML Model Integration", "HuggingFace Transformers", "FastAPI", "WebSockets", "SQLite", "Full-Stack Development", "REST APIs"],
+    github: "https://github.com/yonatan-cs/ParAlert",
+  },
+  {
     title: "PhishEye",
     icon: "/phisheye.png",
     description: "Gmail addon detecting phishing threats via automated scoring of links and attachments. Implemented with FastAPI and ngrok to evaluate sender reputation and generate comprehensive risk assessments.",
@@ -80,7 +87,7 @@ const PROJECTS = [
 ];
 
 const SKILLS = [
-  { title: "Coding", skills: ["Java", "Python", "C", "C++"] },
+  { title: "Coding", skills: ["Java", "Python", "C", "C++", "SQL"] },
   { title: "VCS", skills: ["Git"] },
 ];
 
