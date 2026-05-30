@@ -2,7 +2,7 @@ import { Github, ExternalLink } from "lucide-react";
 
 interface ProjectCardProps {
   title: string;
-  description: string;
+  description: React.ReactNode;
   tags: string[];
   github?: string;
   live?: string;
