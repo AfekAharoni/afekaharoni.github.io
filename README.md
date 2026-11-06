@@ -1,12 +1,14 @@
-<div align="center">
+# Afek Aharoni - Portfolio
 
-<img src="https://raw.githubusercontent.com/AfekAharoni/afekaharoni.github.io/main/public/favicon.png" width="120"/>
+Personal portfolio site, live at https://afekaharoni.github.io/
 
-# Afek Aharoni — Portfolio
+Built with React, TypeScript, Vite and Framer Motion. Deployed to GitHub Pages via GitHub Actions on every push to `main`.
 
-My personal **software engineering portfolio website**, showcasing selected projects, academic work, and technical experience in **computer science and software development**.
+## Run locally
 
-[Visit Portfolio Website](https://afekaharoni.github.io/) •
-[View All Projects](https://github.com/AfekAharoni)
+```bash
+npm install
+npm run dev
+```
 
-</div>
+All content (experience, projects, education, skills) lives in `src/data.tsx`.
