@@ -12,6 +12,12 @@ const { render } = await import(pathToFileURL(serverEntry).href);
 const html = fs.readFileSync(htmlPath, "utf8");
 if (!html.includes("<!--app-->")) throw new Error("Missing <!--app--> placeholder in dist/index.html");
 
-fs.writeFileSync(htmlPath, html.replace("<!--app-->", render()));
+// Inline the stylesheet so the first paint doesn't wait on a second request.
+const inlined = html.replace(/<link rel="stylesheet"[^>]*href="(\/assets\/[^"]+\.css)"[^>]*>/, (_, href) => {
+  const css = fs.readFileSync(path.join(root, "dist", href), "utf8");
+  return `<style>${css}</style>`;
+});
+
+fs.writeFileSync(htmlPath, inlined.replace("<!--app-->", render()));
 fs.rmSync(path.join(root, "dist-ssr"), { recursive: true, force: true });
 console.log("Pre-rendered dist/index.html");
