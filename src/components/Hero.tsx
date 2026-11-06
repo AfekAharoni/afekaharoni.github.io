@@ -1,10 +1,9 @@
+import type { CSSProperties } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { ArrowDown, ArrowRight, FileText, Github, Linkedin, Mail, MapPin } from "lucide-react";
 import { PROFILE } from "../data";
 import Magnetic from "./Magnetic";
 import RotatingText from "./RotatingText";
-
-const ease = [0.22, 1, 0.36, 1] as const;
 
 const SOCIALS = [
   { icon: Github, href: PROFILE.github, label: "GitHub" },
@@ -12,6 +11,9 @@ const SOCIALS = [
   { icon: Mail, href: `mailto:${PROFILE.email}`, label: "Email" },
   { icon: FileText, href: PROFILE.resume, label: "Resume" },
 ];
+
+/** Delay for the CSS intro animation. The intro runs in CSS so it plays from the pre-rendered HTML, before JS loads. */
+const delay = (s: number) => ({ "--d": `${s}s` }) as CSSProperties;
 
 export default function Hero() {
   const { scrollY } = useScroll();
@@ -26,59 +28,33 @@ export default function Hero() {
   return (
     <section id="top" className="hero container">
       <motion.div className="hero-text" style={{ y: textY, opacity: fade }}>
-        <motion.div
-          className="status-pill"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3, ease }}
-        >
+        <div className="status-pill intro-up" style={delay(0.05)}>
           <span className="status-dot" />
           <MapPin size={13} /> {PROFILE.location}
-        </motion.div>
+        </div>
 
         <h1 className="hero-name" aria-label={PROFILE.name}>
           {[first, last].map((word, w) => (
             <span key={word} className="hero-word" aria-hidden>
               {word.split("").map((ch, i) => (
-                <motion.span
-                  key={i}
-                  className="hero-char"
-                  initial={{ y: "110%", opacity: 0 }}
-                  animate={{ y: "0%", opacity: 1 }}
-                  transition={{ duration: 0.9, delay: 0.45 + w * 0.25 + i * 0.045, ease }}
-                >
+                <span key={i} className="hero-char" style={delay(0.1 + w * 0.15 + i * 0.03)}>
                   {ch}
-                </motion.span>
+                </span>
               ))}
             </span>
           ))}
         </h1>
 
-        <motion.p
-          className="hero-role"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.1, ease }}
-        >
+        <p className="hero-role intro-up" style={delay(0.45)}>
           <RotatingText words={PROFILE.roles} />
-        </motion.p>
+        </p>
 
-        <motion.p
-          className="hero-lead"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.25, ease }}
-        >
-          Building Lightning, Dell's parallel file system for large-scale AI, while studying Computer Science at
-          the Hebrew University of Jerusalem.
-        </motion.p>
+        <p className="hero-lead intro-up" style={delay(0.55)}>
+          Studying at the Hebrew University of Jerusalem and currently a Software Engineering Intern at Dell
+          Technologies.
+        </p>
 
-        <motion.div
-          className="hero-actions"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.4, ease }}
-        >
+        <div className="hero-actions intro-up" style={delay(0.65)}>
           <Magnetic>
             <a href="#projects" className="btn btn-primary">
               View my work <ArrowRight size={16} className="btn-arrow" />
@@ -89,16 +65,11 @@ export default function Hero() {
               Get in touch
             </a>
           </Magnetic>
-        </motion.div>
+        </div>
 
-        <motion.ul
-          className="hero-socials"
-          initial="hidden"
-          animate="show"
-          variants={{ show: { transition: { staggerChildren: 0.08, delayChildren: 1.6 } } }}
-        >
-          {SOCIALS.map(({ icon: Icon, href, label }) => (
-            <motion.li key={label} variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}>
+        <ul className="hero-socials">
+          {SOCIALS.map(({ icon: Icon, href, label }, i) => (
+            <li key={label} className="intro-up" style={delay(0.75 + i * 0.06)}>
               <a
                 href={href}
                 target="_blank"
@@ -109,70 +80,45 @@ export default function Hero() {
               >
                 <Icon size={18} />
               </a>
-            </motion.li>
+            </li>
           ))}
-        </motion.ul>
+        </ul>
       </motion.div>
 
-      <motion.div
-        className="hero-visual"
-        style={{ y: photoY }}
-        initial={{ opacity: 0, scale: 0.85 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.2, delay: 0.5, ease }}
-      >
-        <motion.div
-          className="photo-wrap"
-          style={{ rotateX: tiltX, rotateY: tiltY, transformPerspective: 900 }}
-          onPointerMove={(e) => {
-            if (e.pointerType !== "mouse") return;
-            const r = e.currentTarget.getBoundingClientRect();
-            tiltY.set(((e.clientX - r.left) / r.width - 0.5) * 16);
-            tiltX.set(-((e.clientY - r.top) / r.height - 0.5) * 16);
-          }}
-          onPointerLeave={() => {
-            tiltX.set(0);
-            tiltY.set(0);
-          }}
-        >
-          <div className="photo-ring" />
-          <div className="photo-glow" />
-          <img src={PROFILE.photo} alt={PROFILE.name} className="photo" />
+      <motion.div className="hero-visual" style={{ y: photoY }}>
+        <div className="intro-pop" style={delay(0.15)}>
           <motion.div
-            className="float-chip chip-a"
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            className="photo-wrap"
+            style={{ rotateX: tiltX, rotateY: tiltY, transformPerspective: 900 }}
+            onPointerMove={(e) => {
+              if (e.pointerType !== "mouse") return;
+              const r = e.currentTarget.getBoundingClientRect();
+              tiltY.set(((e.clientX - r.left) / r.width - 0.5) * 16);
+              tiltX.set(-((e.clientY - r.top) / r.height - 0.5) * 16);
+            }}
+            onPointerLeave={() => {
+              tiltX.set(0);
+              tiltY.set(0);
+            }}
           >
-            <span className="mono chip-label">GPA</span> 91
+            <div className="photo-ring" />
+            <div className="photo-glow" />
+            <img src={PROFILE.photo} alt={PROFILE.name} className="photo" />
+            <div className="float-chip chip-a">
+              <span className="mono chip-label">GPA</span> 91
+            </div>
+            <div className="float-chip chip-b">
+              <span className="chip-emoji">🏆</span> HUJI Hackathon Top 4
+            </div>
+            <div className="float-chip chip-c mono">{"</>"}</div>
           </motion.div>
-          <motion.div
-            className="float-chip chip-b"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
-          >
-            <span className="chip-emoji">🏆</span> HUJI Hackathon Top 4
-          </motion.div>
-          <motion.div
-            className="float-chip chip-c mono"
-            animate={{ y: [0, -8, 0] }}
-            transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
-          >
-            {"</>"}
-          </motion.div>
-        </motion.div>
+        </div>
       </motion.div>
 
-      <motion.a
-        href="#about"
-        className="scroll-cue"
-        aria-label="Scroll down"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.2, duration: 1 }}
-      >
+      <a href="#about" className="scroll-cue intro-fade" style={delay(1.2)} aria-label="Scroll down">
         <span className="mono">scroll</span>
         <ArrowDown size={14} className="scroll-cue-arrow" />
-      </motion.a>
+      </a>
     </section>
   );
 }

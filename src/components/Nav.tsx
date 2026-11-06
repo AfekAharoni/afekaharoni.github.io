@@ -34,12 +34,7 @@ export default function Nav() {
   return (
     <>
       <motion.div className="scroll-progress" style={{ scaleX: progress }} />
-      <motion.header
-        className={`nav ${scrolled ? "nav-scrolled" : ""}`}
-        initial={{ y: -40, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-      >
+      <header className={`nav ${scrolled ? "nav-scrolled" : ""}`}>
         <div className="container nav-inner">
           <a href="#top" className="nav-logo" aria-label="Back to top">
             <span className="nav-logo-mark">
@@ -96,7 +91,7 @@ export default function Nav() {
             </motion.nav>
           )}
         </AnimatePresence>
-      </motion.header>
+      </header>
     </>
   );
 }

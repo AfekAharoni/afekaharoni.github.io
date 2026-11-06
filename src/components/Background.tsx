@@ -27,7 +27,6 @@ export default function Background() {
       <div className="aurora aurora-2" />
       <div className="aurora aurora-3" />
       <div className="bg-spot" ref={spotRef} />
-      <div className="bg-noise" />
     </div>
   );
 }

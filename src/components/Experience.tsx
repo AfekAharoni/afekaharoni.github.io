@@ -16,7 +16,7 @@ export default function Experience() {
         index="02"
         label="Experience"
         title="Where I've worked."
-        subtitle="From high-performance storage at Dell to leading and teaching in the Air Force."
+        subtitle="From my internship at Dell to leading and teaching in the Air Force."
       />
 
       <div className="timeline" ref={ref}>

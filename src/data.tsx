@@ -5,15 +5,15 @@ export const PROFILE = {
   email: "afekaharoni@gmail.com",
   location: "Rishon LeZion, Israel",
   photo: "/profile.webp",
-  roles: ["Software Engineer @ Dell", "Computer Science Student", "Systems Builder", "Full-Stack Developer"],
+  roles: ["Computer Science Student", "SWE Intern @ Dell", "Full-Stack Developer", "Problem Solver"],
   github: "https://github.com/AfekAharoni",
   linkedin: "https://linkedin.com/in/afek-aharoni",
   resume: "https://drive.google.com/file/d/1-25hvtfAAQWrvzsV65W8W4n4PS0uoOE3/view?usp=sharing",
 };
 
 export const ABOUT = [
-  "I'm a Software Engineer at Dell Technologies, where I work on Lightning, Dell's parallel file system for large-scale AI workloads, and a Computer Science student at the Hebrew University of Jerusalem.",
-  "I enjoy turning complex problems into clean, reliable systems, from high-performance storage to AI-powered applications and security tools. Before tech, I spent three years as an instructor in a classified Air Force unit, where I learned to lead, teach and perform under pressure.",
+  "I'm a Computer Science student at the Hebrew University of Jerusalem and a Software Engineering Intern at Dell Technologies, where I recently joined the team behind Lightning, Dell's parallel file system for AI workloads.",
+  "I enjoy turning complex problems into clean, reliable software, from AI-powered applications to security tools, and I'm always looking to learn something new. Before tech, I spent three years as an instructor in a classified Air Force unit, where I learned to lead, teach and perform under pressure.",
 ];
 
 export const STATS = [
@@ -24,7 +24,7 @@ export const STATS = [
 ];
 
 export const TERMINAL = [
-  { cmd: "whoami", out: "software engineer @ dell · CS student @ HUJI" },
+  { cmd: "whoami", out: "CS student @ HUJI · SWE intern @ dell" },
   { cmd: "cat interests.txt", out: "distributed systems · storage · AI infrastructure · security" },
 ];
 
@@ -32,11 +32,11 @@ export const EXPERIENCE = [
   {
     company: "Dell Technologies",
     logo: "/logos/dell.svg",
-    role: "Software Engineer - Lightning File System",
+    role: "Software Engineering Intern - Lightning File System",
     period: "Oct 2026 - Present",
     description:
-      "Developing Dell Lightning, a software-defined parallel file system built for extreme-scale AI training and inference. Working on a high-performance distributed storage platform designed to feed data to large GPU clusters at very high throughput, with a focus on performance, scalability and reliability.",
-    tags: ["Parallel File Systems", "Distributed Systems", "Storage", "AI Infrastructure"],
+      "Recently joined the team behind Dell Lightning, a software-defined parallel file system built for large-scale AI training and inference. Learning how a high-performance distributed storage system is designed and built, and contributing to the team's day-to-day development work.",
+    tags: ["Parallel File Systems", "Distributed Storage", "AI Infrastructure"],
   },
   {
     company: "The Hebrew University of Jerusalem",
@@ -49,7 +49,7 @@ export const EXPERIENCE = [
   },
   {
     company: "Israel Defense Forces",
-    logo: "/logos/iaf.png",
+    logo: "/logos/iaf.webp",
     role: "Instructor, Classified Operational Unit (Air Force)",
     period: "2021 - 2024",
     description:
@@ -82,7 +82,7 @@ export type Project = {
 export const PROJECTS: Project[] = [
   {
     title: "ParAlert",
-    icon: "/paralert.png",
+    icon: "/paralert.webp",
     subtitle: "AI-powered child-safety alert system",
     badge: "Top 4 Finalist · HUJI Hackathon 2026",
     featured: true,
@@ -100,7 +100,7 @@ export const PROJECTS: Project[] = [
   },
   {
     title: "PhishEye",
-    icon: "/phisheye.png",
+    icon: "/phisheye.webp",
     subtitle: "Malicious email scorer for Gmail",
     description:
       "A Gmail add-on that detects phishing threats by automatically scoring links and attachments. Evaluates sender reputation and email authentication to generate a comprehensive risk assessment.",
@@ -109,7 +109,7 @@ export const PROJECTS: Project[] = [
   },
   {
     title: "SecureShare",
-    icon: "/secureshare.png",
+    icon: "/secureshare.webp",
     subtitle: "Decentralized encrypted file sharing",
     description:
       "A decentralized file-sharing application with end-to-end encryption, protecting data in transit and at rest and granting access only to authorized users.",
@@ -118,7 +118,7 @@ export const PROJECTS: Project[] = [
   },
   {
     title: "Text Analyzer",
-    icon: "/textanalyzer.png",
+    icon: "/textanalyzer.webp",
     subtitle: "Graph-based sentence clustering",
     description:
       "Clusters sentences by shared words and finds fixed-length paths in connection graphs, with a focus on graph algorithms, optimization and performance analysis.",

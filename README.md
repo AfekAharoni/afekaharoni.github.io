@@ -2,7 +2,7 @@
 
 # Afek Aharoni
 
-**Software Engineer @ Dell Technologies · Computer Science @ The Hebrew University of Jerusalem**
+**Computer Science @ The Hebrew University of Jerusalem · Software Engineering Intern @ Dell Technologies**
 
 [**afekaharoni.github.io**](https://afekaharoni.github.io/)
 
@@ -17,7 +17,7 @@
 ## About
 
 My personal portfolio: experience, projects, education and skills in one place.
-I work on **Lightning**, Dell's parallel file system for large-scale AI, and study Computer Science at the Hebrew University of Jerusalem.
+I study Computer Science at the Hebrew University of Jerusalem and recently joined Dell Technologies as a Software Engineering Intern on the **Lightning** parallel file system team.
 
 ## Highlights
 
