@@ -8,7 +8,6 @@
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-afek--aharoni-0A66C2?logo=linkedin&logoColor=white)](https://linkedin.com/in/afek-aharoni)
 [![Email](https://img.shields.io/badge/Email-afekaharoni%40gmail.com-EA4335?logo=gmail&logoColor=white)](mailto:afekaharoni@gmail.com)
-[![Deploy](https://github.com/AfekAharoni/afekaharoni.github.io/actions/workflows/static.yml/badge.svg)](https://github.com/AfekAharoni/afekaharoni.github.io/actions/workflows/static.yml)
 
 <a href="https://afekaharoni.github.io/"><img src="docs/preview.webp" alt="Portfolio preview" width="900" /></a>
 
