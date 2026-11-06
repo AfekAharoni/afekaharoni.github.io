@@ -42,7 +42,9 @@ export default function Nav() {
       >
         <div className="container nav-inner">
           <a href="#top" className="nav-logo" aria-label="Back to top">
-            <span className="nav-logo-mark">AA</span>
+            <span className="nav-logo-mark">
+              <img src={PROFILE.photo} alt="" />
+            </span>
             <span className="nav-logo-text">{PROFILE.name}</span>
           </a>
 

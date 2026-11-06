@@ -26,7 +26,13 @@ export default function Experience() {
 
         {EXPERIENCE.map((exp, i) => (
           <Reveal key={exp.company} delay={i * 0.05} className="timeline-item">
-            <span className="timeline-dot" />
+            <motion.span
+              className="timeline-dot"
+              initial={{ scale: 0 }}
+              whileInView={{ scale: [0, 1.4, 1] }}
+              viewport={{ once: true, margin: "-120px" }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+            />
             <div className="card exp-card">
               <div className="exp-head">
                 <div className="exp-id">

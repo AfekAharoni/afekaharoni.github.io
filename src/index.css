@@ -41,6 +41,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  overflow-x: clip;
+}
+
+html {
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 ::selection {
@@ -248,22 +254,27 @@ ul {
 }
 
 .nav-logo-mark {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  background: var(--grad);
-  color: #fff;
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0;
+  display: block;
+  width: 38px;
+  height: 38px;
+  padding: 2px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
   box-shadow: 0 6px 20px -6px rgba(139, 92, 246, 0.7);
-  transition: transform 0.5s var(--ease);
+  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+}
+
+.nav-logo-mark img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--bg);
 }
 
 .nav-logo:hover .nav-logo-mark {
-  transform: rotate(-8deg) scale(1.06);
+  transform: scale(1.08);
+  box-shadow: 0 8px 26px -6px rgba(236, 72, 153, 0.8);
 }
 
 .nav-links {
@@ -770,6 +781,65 @@ ul {
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: -0.035em;
+}
+
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+
+.word-mask + .word-mask {
+  margin-left: 0.25em;
+}
+
+.word {
+  display: inline-block;
+}
+
+.eyebrow-line {
+  transform-origin: left;
+}
+
+/* Back to top */
+.to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  color: var(--text);
+  background: rgba(15, 17, 24, 0.8);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.9);
+}
+
+.to-top-ring {
+  position: absolute;
+  inset: 0;
+  transform: rotate(-90deg);
+}
+
+.to-top-track,
+.to-top-progress {
+  fill: none;
+  stroke-width: 2.5;
+}
+
+.to-top-track {
+  stroke: rgba(255, 255, 255, 0.08);
+}
+
+.to-top-progress {
+  stroke: url(#ring-grad);
+  stroke-linecap: round;
 }
 
 .section-subtitle {
@@ -1642,6 +1712,19 @@ ul {
   .exp-logo {
     width: 42px;
     height: 42px;
+  }
+  .hero {
+    padding-top: 100px;
+    gap: 44px;
+  }
+  .photo-wrap {
+    width: min(190px, 52vw);
+  }
+  .to-top {
+    right: 16px;
+    bottom: 16px;
+    width: 46px;
+    height: 46px;
   }
   .exp-id {
     gap: 14px;

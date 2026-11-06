@@ -52,6 +52,7 @@ function ProjectCard({ project }: { project: Project }) {
       className={`project card ${project.featured ? "project-featured" : ""}`}
       style={{ rotateX: rx, rotateY: ry, transformPerspective: 1200 }}
       onPointerMove={(e) => {
+        if (e.pointerType !== "mouse") return;
         const r = e.currentTarget.getBoundingClientRect();
         const x = e.clientX - r.left;
         const y = e.clientY - r.top;

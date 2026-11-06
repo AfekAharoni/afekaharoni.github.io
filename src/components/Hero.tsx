@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { ArrowDown, ArrowRight, FileText, Github, Linkedin, Mail, MapPin } from "lucide-react";
 import { PROFILE } from "../data";
 import Magnetic from "./Magnetic";
@@ -18,6 +18,8 @@ export default function Hero() {
   const photoY = useTransform(scrollY, [0, 600], [0, 80]);
   const textY = useTransform(scrollY, [0, 600], [0, -40]);
   const fade = useTransform(scrollY, [0, 500], [1, 0]);
+  const tiltX = useSpring(0, { stiffness: 120, damping: 14 });
+  const tiltY = useSpring(0, { stiffness: 120, damping: 14 });
 
   const [first, last] = PROFILE.name.split(" ");
 
@@ -119,7 +121,20 @@ export default function Hero() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.2, delay: 0.5, ease }}
       >
-        <div className="photo-wrap">
+        <motion.div
+          className="photo-wrap"
+          style={{ rotateX: tiltX, rotateY: tiltY, transformPerspective: 900 }}
+          onPointerMove={(e) => {
+            if (e.pointerType !== "mouse") return;
+            const r = e.currentTarget.getBoundingClientRect();
+            tiltY.set(((e.clientX - r.left) / r.width - 0.5) * 16);
+            tiltX.set(-((e.clientY - r.top) / r.height - 0.5) * 16);
+          }}
+          onPointerLeave={() => {
+            tiltX.set(0);
+            tiltY.set(0);
+          }}
+        >
           <div className="photo-ring" />
           <div className="photo-glow" />
           <img src={PROFILE.photo} alt={PROFILE.name} className="photo" />
@@ -144,7 +159,7 @@ export default function Hero() {
           >
             {"</>"}
           </motion.div>
-        </div>
+        </motion.div>
       </motion.div>
 
       <motion.a
